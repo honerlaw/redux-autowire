@@ -1,5 +1,5 @@
 {
-  "name": "redux-autowire",
+  "name": "@honerlawd/redux-autowire",
   "version": "1.1.2",
   "description": "",
   "main": "index.js",
@@ -9,6 +9,9 @@
     "clean": "rm -rf ./*.js ./*.js.map ./*.d.ts ./async ./decorator",
     "build": "npm run clean && npm run lint && tsc -p ./tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "author": "",
   "license": "ISC",
