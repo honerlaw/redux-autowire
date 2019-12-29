@@ -2,7 +2,7 @@ export const ASYNC_REDUCER_NAME: string = "async_reducer_name";
 
 export interface IAsyncFailure {
     finishedAt: number;
-    failures: string[];
+    failure: any;
 }
 
 export interface IAsyncState {

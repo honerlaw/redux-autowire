@@ -3,11 +3,11 @@ import {ThunkDispatch} from "redux-thunk";
 import {IRequestAction} from "./request-action";
 import {StoreManager} from "./store-manager";
 
-export type AbstractDispatch<T extends IRequestAction<any> = any> = ThunkDispatch<{}, {}, T> | Dispatch<T>;
+export type ActionHandlerDispatcher<T extends IRequestAction<any> = any> = ThunkDispatch<{}, {}, T> | Dispatch<T>;
 
-export type AsyncAction = (dispatch: AbstractDispatch) => Promise<void>;
+export type AsyncAction = (dispatch: ActionHandlerDispatcher) => Promise<void>;
 
-export interface IAbstractActionOptions {
+export interface IActionHandlerOptions {
     reducer?: string; // the reducer that will handle the dispatched action and where the state is allocated
     selectorName?: string; // the name we use for the selector (e.g. this.props.{selectorName})
     dispatcherName?: string; // the name we use for the dispatcher (e.g. this.props.{dispatcherName})
@@ -15,10 +15,10 @@ export interface IAbstractActionOptions {
 
 export abstract class ActionHandler<State, RequestActionPayload, ActionRequest, Selector> {
 
-    private readonly options: IAbstractActionOptions;
+    private readonly options: IActionHandlerOptions;
     private readonly type: string;
 
-    protected constructor(options: IAbstractActionOptions = {}) {
+    protected constructor(options: IActionHandlerOptions = {}) {
         this.options = options;
 
         this.type = this.constructor.name;
@@ -43,7 +43,7 @@ export abstract class ActionHandler<State, RequestActionPayload, ActionRequest, 
     /**
      * For the most part, we can always assume this is how a mapDispatchToProp would work for any given action
      */
-    public mapDispatchToProp(dispatch: AbstractDispatch): { [key: string]: (req: ActionRequest) => void } {
+    public mapDispatchToProp(dispatch: ActionHandlerDispatcher): { [key: string]: (req: ActionRequest) => void } {
         if (!this.options.dispatcherName) {
             return {};
         }

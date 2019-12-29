@@ -35,7 +35,7 @@ class AsyncFailureActionImpl extends ActionHandler<IAsyncState, IAsyncFailureAct
 
         const actionType: string = action.payload.actionType;
         const finishedAt: number = action.payload.finishedAt;
-        const failures: string[] = action.payload.failures;
+        const failure: any = action.payload.failure;
 
         if (state.pending) {
             delete state.pending[actionType];
@@ -45,7 +45,7 @@ class AsyncFailureActionImpl extends ActionHandler<IAsyncState, IAsyncFailureAct
         }
         state.failure[actionType] = {
             finishedAt,
-            failures
+            failure
         };
 
         return state;
