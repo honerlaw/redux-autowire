@@ -29,9 +29,19 @@ export abstract class ActionHandler<State, RequestActionPayload, ActionRequest, 
         StoreManager.registerAction(this.options.reducer, this.getActionType(), this.reduce.bind(this));
     }
 
-    public abstract reduce(state: State, action: IRequestAction<RequestActionPayload>): State;
+    /**
+     * Can be overriden to handle setting state given the action
+     */
+    public reduce(state: State, action: IRequestAction<RequestActionPayload>): State {
+        return state;
+    }
 
-    public abstract selector(state: State): Selector;
+    /**
+     * Can be overriden to return the correct state for the given selector
+     */
+    public selector(state: State): Selector {
+        return undefined;
+    }
 
     /**
      * Can be overriden to handle custom action payloads

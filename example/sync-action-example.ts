@@ -11,10 +11,16 @@ class SyncActionExample extends ActionHandler<any, any, any, any> {
         });
     }
 
+    /**
+     * can optionally be overriden
+     */
     public reduce(state: any, action: IRequestAction<any>): any {
         return undefined;
     }
 
+    /**
+     * can optionally be overriden
+     */
     public selector(state: any): any {
         return undefined;
     }
